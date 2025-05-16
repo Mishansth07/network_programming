@@ -8,11 +8,11 @@ public class Async_Server {
     public static void main (String [] args){
         try {
             AsynchronousServerSocketChannel server = AsynchronousServerSocketChannel.open();
-            server.bind(new InetSocketAddress("localhost", 3001));
+            server.bind(new InetSocketAddress("localhost", 5556));
 
             while (true) {
                 Future<AsynchronousSocketChannel> acceptConnection = server.accept();
-                AsynchronousSocketChannel client = acceptConnection.get(10, TimeUnit.SECONDS);
+                AsynchronousSocketChannel client = acceptConnection.get(100, TimeUnit.SECONDS);
 
                 if ((client!=null) && (client.isOpen())) {
                     ByteBuffer buffer = ByteBuffer.allocate(1024);
@@ -22,9 +22,10 @@ public class Async_Server {
                     byte[] fromClient = new byte[buffer.remaining()];
                     buffer.get(fromClient);
                     System.out.println("message from client: " + new String(fromClient));
+                    client.close();
                 }
 
-                client.close();
+                
                 
             }
         } catch (Exception ex) {

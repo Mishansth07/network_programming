@@ -8,7 +8,7 @@ import java.nio.channels.SocketChannel;
 public class Client_Channel {
     public static void main(String[] args) {
         try {
-            InetSocketAddress sa = new InetSocketAddress("localhost", 3001);
+            InetSocketAddress sa = new InetSocketAddress("localhost", 5556);
             SocketChannel client = SocketChannel.open(sa);
             client.configureBlocking(true); // Make sure it blocks on read/write
             BufferedReader sysReader = new BufferedReader(new InputStreamReader(System.in));
@@ -30,15 +30,15 @@ public class Client_Channel {
                 System.out.println("Sent: " + text + " to " + sa);
 
                 // Read response from server
-                readBuffer.clear();
-                int bytesRead = client.read(readBuffer);
-                if (bytesRead > 0) {
-                    readBuffer.flip();
-                    byte[] responseData = new byte[bytesRead];
-                    readBuffer.get(responseData);
-                    String response = new String(responseData);
-                    System.out.println("Server Response: " + response);
-                }
+                // readBuffer.clear();
+                // int bytesRead = client.read(readBuffer);
+                // if (bytesRead > 0) {
+                //     readBuffer.flip();
+                //     byte[] responseData = new byte[bytesRead];
+                //     readBuffer.get(responseData);
+                //     String response = new String(responseData);
+                //     System.out.println("Server Response: " + response);
+                // }
             }
 
             client.close();

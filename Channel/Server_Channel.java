@@ -13,7 +13,7 @@ public class Server_Channel {
         try {
             ServerSocketChannel serverChannel = ServerSocketChannel.open();
             serverChannel.configureBlocking(false);
-            serverChannel.bind(new InetSocketAddress(3001));
+            serverChannel.bind(new InetSocketAddress(5556));
             Selector selector = Selector.open();
             serverChannel.register(selector, SelectionKey.OP_ACCEPT);
             while (true) {
@@ -49,7 +49,5 @@ public class Server_Channel {
             System.out.println("IOError: "+ ex.getMessage());
             
         }
-        
     }
-    
 }
